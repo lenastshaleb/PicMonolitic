@@ -1,10 +1,10 @@
 Jenkinsfile (Declarative Pipeline)
-Pipeline {
+pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'mvn --version'
+                sh 'mvn clean package'
             }
         }
     }
