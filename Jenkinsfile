@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('test nodejs') {
             steps {
-                nodejs(nodeJSInstallationName: 'Node 8.x', configId: '<config-file-provider-id>') {
+                nodejs(nodeJSInstallationName: 'Node 9.x', configId: '<config-file-provider-id>') {
                     bar 'node --version'
                 }
             }
