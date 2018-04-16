@@ -5,6 +5,7 @@ pipeline {
 		nodejs 'NodeJS'
 		jdk 'J8'
     }
+	//test
     stages {
         stage ('test nodejs') {
 			bat 'node --version'
