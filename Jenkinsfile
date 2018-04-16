@@ -7,8 +7,7 @@ pipeline {
     }
     stages {
         stage ('test nodejs') {
-				bat 'node --version'
-            }
+			bat 'node --version'
         }
     }
 }
