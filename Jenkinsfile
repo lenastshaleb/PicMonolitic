@@ -4,9 +4,11 @@ pipeline {
         maven 'Maven 3.5.3'
 		jdk 'Jdk10'
     }
-    stages ('test nodejs') {
-        nodejs(nodeJSInstallationName: 'Node 8.x', configId: '<config-file-provider-id>') {
-            bat 'npm --version'
+    stages {
+        stage ('test nodejs') {
+            nodejs(nodeJSInstallationName: 'Node 8.x', configId: '<config-file-provider-id>') {
+                bat 'npm --version'
+            }
         }
     }
 }
