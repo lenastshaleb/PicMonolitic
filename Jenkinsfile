@@ -1,9 +1,8 @@
 pipeline {
     agent any
-	//on declareeeeeee
 	tools { 
         maven 'Maven 3.5.3'
-		jdk 'Jdk10'
+		jdk 'J8'
     }
     stages {
         stage ('test nodejs') {
