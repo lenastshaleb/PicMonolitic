@@ -6,25 +6,24 @@ node {
     }
 
     stage('check java') {
-        sh "java -version"
+        bat "java -version"
     }
 
     stage('clean') {
-        sh "chmod +x mvnw"
-        sh "./mvnw clean"
+        bat "mvnw clean"
     }
 
     stage('install tools') {
-        sh "./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2"
+        bat "mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2"
     }
 
     stage('yarn install') {
-        sh "./mvnw com.github.eirslett:frontend-maven-plugin:yarn"
+        bat "mvnw com.github.eirslett:frontend-maven-plugin:yarn"
     }
 
     stage('backend tests') {
         try {
-            sh "./mvnw test"
+            bat "mvnw test"
         } catch(err) {
             throw err
         } finally {
@@ -34,7 +33,7 @@ node {
 
     stage('frontend tests') {
         try {
-            sh "./mvnw com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+            bat "./mvnw com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
         } catch(err) {
             throw err
         } finally {
@@ -43,8 +42,11 @@ node {
     }
 
     stage('packaging') {
-        sh "./mvnw verify -Pprod -DskipTests"
+        bat "mvnw verify -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
+		cleanWs()
     }
+	
+	
 
 }
