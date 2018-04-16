@@ -1,15 +1,36 @@
 pipeline {
     agent any
 	tools { 
-        maven 'Maven 3.5.3'
+        maven 'Maven'
 		nodejs 'NodeJS'
-		jdk 'J8'
+		jdk 'Jdk'
     }
     stages {
-        stage ('test nodejs') {
-				steps {
-					bat 'node --version'
-				}
-            }
-    }
+	
+        //clone git [il faut que l'option from scm soit spécifée dans l'interface de jenkins]
+		stage('cloning') {
+			steps {
+				git 'https://github.com/lenastshaleb/PicMonolitic.git'
+			}
+		}
+		
+		//verifie si java est installé
+		stage('checking java') {
+			steps{
+				bat "java -version"
+			}
+		}
+	
+		//on vide les tiroirs 
+		stage('cleaning') {
+			steps{
+				bat "mvn clean"
+			}
+		}
+		
+		stage('Test'){
+			steps{
+				bat "mvn test"
+			}
+		}
 }
