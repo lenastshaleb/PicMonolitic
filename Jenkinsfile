@@ -7,30 +7,11 @@ pipeline {
     }
     stages {
 	
-        //clone git [il faut que l'option from scm soit spécifée dans l'interface de jenkins]
-		stage('cloning') {
-			steps {
-				git 'https://github.com/lenastshaleb/PicMonolitic.git'
-			}
-		}
-		
-		//verifie si java est installé
-		stage('checking java') {
+        stage('Analyse SonarQube') {
 			steps{
-				bat "java -version"
-			}
-		}
-	
-		//on vide les tiroirs 
-		stage('cleaning') {
-			steps{
-				bat "mvn clean"
-			}
-		}
-		
-		stage('Test'){
-			steps{
-				bat "mvn test"
+				withSonarQubeEnv('SonarQube') {      
+					bat "mvn sonar:sonar"
+				}
 			}
 		}
 	}
