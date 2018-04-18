@@ -965,4 +965,11 @@
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>
+	<distributionManagement>
+       <repository>
+         <id>internal.repo</id>
+         <name>Internal repo</name>
+         <url>file:///C:/test</url>
+       </repository>
+   </distributionManagement>
 </project>
